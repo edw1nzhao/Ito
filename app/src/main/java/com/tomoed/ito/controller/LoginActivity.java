@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 Log.d(TAG, "onComplete: Authentication complete.");
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
