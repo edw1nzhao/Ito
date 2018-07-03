@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "363926765060",
+    "firebase_url": "https://itoproject-4c942.firebaseio.com",
+    "project_id": "itoproject-4c942",
+    "storage_bucket": "itoproject-4c942.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363926765060:android:d804206f9c600f8c",
+        "android_client_info": {
+          "package_name": "com.tomoed.ito"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363926765060-9bikvq7djm8fgpb6ho74176k62qqk58d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tomoed.ito",
+            "certificate_hash": "bd825577f7d147de5556a813e7fd5a028abb404e"
+          }
+        },
+        {
+          "client_id": "363926765060-eod0m35291i4t080minp7kufcg4hetl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJCgl7BQgXaRmv-X4Pxv6yOj7ESPC3Y18"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363926765060-eod0m35291i4t080minp7kufcg4hetl7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
