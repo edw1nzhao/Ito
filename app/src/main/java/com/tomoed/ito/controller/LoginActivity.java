@@ -98,10 +98,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void getUserAccountData(){
         Log.d(TAG, "getUserAccountData: Getting the user account data.");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        Query query1 = reference.child("users")
+        Query query = reference.child("users")
                 .orderByKey()
                 .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        query1.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
