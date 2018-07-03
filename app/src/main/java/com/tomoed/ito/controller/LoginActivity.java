@@ -1,5 +1,6 @@
 package com.tomoed.ito.controller;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,9 +29,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        emailField = (EditText) findViewById(R.id.login_edittext_email);
-        passwordField = (EditText) findViewById(R.id.login_edittext_password);
-        findViewById(R.id.login_button_login).setOnClickListener(this);
+        emailField = findViewById(R.id.login_edittext_email);
+        passwordField = findViewById(R.id.login_edittext_password);
+        findViewById(R.id.login_button_register).setOnClickListener(this);
 
         setupFirebaseAuth();
     }
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int i = v.getId();
+
         if (i == R.id.login_button_login) {
             //Check if the fields are filled out.
             if (!isEmpty(emailField.getText().toString()) && !isEmpty(passwordField.getText().toString())) {
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Log.d(TAG, "onComplete: Authentication complete.");
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -55,6 +58,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.d(TAG, "onFailure: Authentication failed.");
                         }
                     });
+            } else {
+                Toast.makeText(LoginActivity.this, "You didn't fill in all the fields.", Toast.LENGTH_SHORT).show();
+            }
+        } else if (i == R.id.login_button_register) {
+            if (!isEmpty(emailField.getText().toString()) && !isEmpty(passwordField.getText().toString())) {
+               startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             } else {
                 Toast.makeText(LoginActivity.this, "You didn't fill in all the fields.", Toast.LENGTH_SHORT).show();
             }
@@ -130,7 +139,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public boolean isEmpty(String string){
         return string.equals("");
     }
-
 
     //Move to registration activity later.
     // Added here for now because there is no way to manually send verification email in Firebase console.
