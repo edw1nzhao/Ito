@@ -1,12 +1,10 @@
 package com.tomoed.ito.controller;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,12 +14,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.tomoed.ito.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,9 +28,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        emailField = (EditText) findViewById(R.id.editText2);
-        passwordField = (EditText) findViewById(R.id.editText);
-        findViewById(R.id.button).setOnClickListener(this);
+        emailField = (EditText) findViewById(R.id.login_edittext_email);
+        passwordField = (EditText) findViewById(R.id.login_edittext_password);
+        findViewById(R.id.login_button_login).setOnClickListener(this);
 
         setupFirebaseAuth();
     }
@@ -46,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.button) {
+        if (i == R.id.login_button_login) {
             //Check if the fields are filled out.
             if (!isEmpty(emailField.getText().toString()) && !isEmpty(passwordField.getText().toString())) {
                 Log.d(TAG, "onClick: Attempting to authenticate.");

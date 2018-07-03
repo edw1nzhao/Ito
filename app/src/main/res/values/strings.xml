@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Ito</string>
+
+    <!--LoginActivity-->
+    <string name="login_textview_login">Login</string>
+    <string name="login_edittext_email">Email</string>
+    <string name="login_edittext_password">Password</string>
+    <string name="login_button_login">LOGIN</string>
+    <string name="login_switch_remember_me">Remember Me?</string>
+
 </resources>
