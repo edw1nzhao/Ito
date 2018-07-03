@@ -1,4 +1,4 @@
-package com.tomoed.ito.controller;
+package com.tomoed.ito.model;
 
 import java.io.Serializable;
 

@@ -2,30 +2,31 @@
     <string name="app_name">Ito</string>
 
     <!--LoginActivity-->
-    <string name="login_textview_login">Login</string>
-    <string name="login_edittext_email">Email</string>
-    <string name="login_edittext_password">Password</string>
+    <string name="login_text_login">Login</string>
+    <string name="login_edit_email">Email</string>
+    <string name="login_edit_password">Password</string>
     <string name="login_button_login">LOGIN</string>
     <string name="login_button_register">REGISTER</string>
     <string name="login_switch_remember_me">Remember Me?</string>
 
+    <!--NavBar-->
+    <string name="nav_drawer_open">Open navigation drawer</string>
+    <string name="nav_drawer_close">Close navigation drawer</string>
+    <string name="nav_title_list">List</string>
+    <string name="nav_title_map">Map</string>
+    <string name="nav_title_settings">Settings</string>
 
     <!-- Main Activity -->
-    <string name="title_activity_main">Home</string>
+    <string name="main_title">Home</string>
+    <string name="main_button_desc">Add new Event Button</string>
 
-    <string name="title_list">List</string>
-    <string name="title_map">Map</string>
-    <string name="title_settings">Settings</string>
+
+    <!--Settings-->
+    <string name="settings_button_logout">Sign out</string>
 
     <!-- -->
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
 
     <!--Google Maps API Key-->
     <string name="google_maps_key">AIzaSyBSOLkfB1fKZLoECfsPifY0dEscK0wu-mk</string>

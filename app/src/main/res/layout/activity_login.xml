@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="155dp"
         android:layout_marginTop="63dp"
-        android:text="@string/login_textview_login"
+        android:text="@string/login_text_login"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/white"
         android:textSize="40sp"
@@ -27,7 +27,7 @@
         android:layout_marginStart="99dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/login_edittext_password"
+        android:hint="@string/login_edit_password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_edittext_email" />
@@ -39,7 +39,7 @@
         android:layout_marginStart="99dp"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="@string/login_edittext_email"
+        android:hint="@string/login_edit_email"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button_image" />

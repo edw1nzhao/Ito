@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.tomoed.ito.R;
+import com.tomoed.ito.model.User;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText;

@@ -70,11 +70,11 @@ public class MainFragment extends Fragment {
                 googleMap.getUiSettings().setMyLocationButtonEnabled(true);
                 googleMap.getUiSettings().setRotateGesturesEnabled(true);
 
-                LatLng sydney = new LatLng(33.779737f, -84.390354);
-                googleMap.addMarker(new MarkerOptions().position(sydney).
+                LatLng location = new LatLng(33.779737f, -84.390354);
+                googleMap.addMarker(new MarkerOptions().position(location).
                         title("Yes").snippet("TitleName"));
 
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(location).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition
                         (cameraPosition));
             }

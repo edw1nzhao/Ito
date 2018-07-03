@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.tomoed.ito.R;
+import com.tomoed.ito.model.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
