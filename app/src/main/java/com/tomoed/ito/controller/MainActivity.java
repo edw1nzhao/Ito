@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private boolean loadFragment(Fragment fragment) {
-        //switching fragment
+        //Switching fragments.
         if (fragment != null) {
             getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
             return true;
         }
         return false;

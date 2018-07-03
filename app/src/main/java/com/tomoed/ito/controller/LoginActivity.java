@@ -15,6 +15,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.tomoed.ito.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -32,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         emailField = findViewById(R.id.login_edittext_email);
         passwordField = findViewById(R.id.login_edittext_password);
         findViewById(R.id.login_button_register).setOnClickListener(this);
+        findViewById(R.id.login_button_login).setOnClickListener(this);
 
         setupFirebaseAuth();
     }
@@ -39,34 +46,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int i = v.getId();
-
         if (i == R.id.login_button_login) {
             //Check if the fields are filled out.
             if (!isEmpty(emailField.getText().toString()) && !isEmpty(passwordField.getText().toString())) {
                 Log.d(TAG, "onClick: Attempting to authenticate.");
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(emailField.getText().toString(), passwordField.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            Log.d(TAG, "onComplete: Authentication complete.");
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onFailure: Authentication failed.");
-                        }
-                    });
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                Log.d(TAG, "onComplete: Authentication complete.");
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onFailure: Authentication failed.");
+                    }
+                });
             } else {
                 Toast.makeText(LoginActivity.this, "You didn't fill in all the fields.", Toast.LENGTH_SHORT).show();
             }
         } else if (i == R.id.login_button_register) {
-            if (!isEmpty(emailField.getText().toString()) && !isEmpty(passwordField.getText().toString())) {
-               startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            } else {
-                Toast.makeText(LoginActivity.this, "You didn't fill in all the fields.", Toast.LENGTH_SHORT).show();
-            }
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            this.finish();
         }
     }
 
@@ -83,10 +87,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         getUserAccountData();
                     } else {
                         Toast.makeText(LoginActivity.this, "Email is not verified.\nCheck your inbox.", Toast.LENGTH_SHORT).show();
-
-                        //Delete later. Add to registration activity.
-                        sendVerificationEmail();
-
                         FirebaseAuth.getInstance().signOut();
                     }
                 } else {
@@ -98,28 +98,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void getUserAccountData(){
         Log.d(TAG, "getUserAccountData: Getting the user account data.");
-        Toast.makeText(LoginActivity.this, "getUserAccountData: Auth success. This method will start new activity.", Toast.LENGTH_SHORT).show();
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//        Query query1 = reference.child("users")
-//                .orderByKey()
-//                .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        query1.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-//                    User user = (User) singleSnapshot.getValue(User.class);
-//                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    intent.putExtra("USER", user);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.d(TAG, databaseError.getMessage());
-//            }
-//        });
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        Query query1 = reference.child("users")
+                .orderByKey()
+                .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        query1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
+                    User user = (User) singleSnapshot.getValue(User.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("USER", user);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, databaseError.toString());
+            }
+        });
     }
 
     @Override
@@ -136,27 +135,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public boolean isEmpty(String string){
+    public boolean isEmpty(String string) {
         return string.equals("");
-    }
-
-    //Move to registration activity later.
-    // Added here for now because there is no way to manually send verification email in Firebase console.
-    public void sendVerificationEmail() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            user.sendEmailVerification()
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Sent Verification Email", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Couldn't Verification Send Email", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
     }
 }
 
