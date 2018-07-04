@@ -12,8 +12,9 @@
     <!--NavBar-->
     <string name="nav_drawer_open">Open navigation drawer</string>
     <string name="nav_drawer_close">Close navigation drawer</string>
-    <string name="nav_title_list">List</string>
     <string name="nav_title_map">Map</string>
+    <string name="nav_title_list">List</string>
+    <string name="nav_title_account">Account</string>
     <string name="nav_title_settings">Settings</string>
 
     <!-- Main Activity -->
@@ -29,4 +30,7 @@
 
     <!--Google Maps API Key-->
     <string name="google_maps_key">AIzaSyBSOLkfB1fKZLoECfsPifY0dEscK0wu-mk</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
