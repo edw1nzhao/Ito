@@ -51,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             user.setLastName(lastName);
             user.setEmail(email);
             user.setPassword(password);
+            user.setKarma(0);
 
             registerNewEmail(user.getEmail(), user.getPassword());
         }

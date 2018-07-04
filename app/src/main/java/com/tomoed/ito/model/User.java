@@ -7,17 +7,19 @@ public class User implements Serializable {
     private String lastName;
     private String email;
     private String password;
+    private int karma;
     private String uid;
 
     public User() {
 
     }
 
-    public User(String firstName, String lastName, String email, String password, String uid) {
+    public User(String firstName, String lastName, String email, String password, int karma, String uid) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.karma = karma;
         this.uid = uid;
     }
 
@@ -53,6 +55,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public int getKarma() {
+        return karma;
+    }
+
+    public void setKarma(int karma) {
+        this.karma = karma;
+    }
+
     public String getUid() {
         return uid;
     }
@@ -68,6 +78,7 @@ public class User implements Serializable {
                 "lastName='" + lastName + "\', " +
                 "email='" + email + "\', " +
                 "password=" + password + "\', " +
+                "karma=" + karma + "\', " +
                 "uid=" + uid +
                 '}';
     }
