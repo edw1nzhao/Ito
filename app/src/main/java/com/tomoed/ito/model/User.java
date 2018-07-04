@@ -64,10 +64,11 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User {" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password=" + password +
+                "firstName='" + firstName + "\', " +
+                "lastName='" + lastName + "\', " +
+                "email='" + email + "\', " +
+                "password=" + password + "\', " +
+                "uid=" + uid +
                 '}';
     }
 }
