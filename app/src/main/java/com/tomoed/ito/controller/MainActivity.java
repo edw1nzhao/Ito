@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         fragmentManager.beginTransaction().replace(R.id.flContent, mainFrag).commit();
 
-        //Setup NavigationView close button.
+        //Setup NavigationView close button.e
         navigationHeaderView = navigationView.getHeaderView(0);
         navigationHeaderView.findViewById(R.id.nav_button_close).setOnClickListener(this);
 
