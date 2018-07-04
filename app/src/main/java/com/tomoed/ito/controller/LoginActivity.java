@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     //Check if email is verified.
-                    if(user.isEmailVerified()){
+                    if (user.isEmailVerified()) {
                         Log.d(TAG, "onAuthStateChanged: Signed in " + user.getUid());
                         Toast.makeText(LoginActivity.this, "Authenticated with: " + user.getEmail(), Toast.LENGTH_SHORT).show();
                         getUserAccountData();

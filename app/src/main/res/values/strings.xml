@@ -20,7 +20,6 @@
     <string name="main_title">Home</string>
     <string name="main_button_desc">Add new Event Button</string>
 
-
     <!--Settings-->
     <string name="settings_button_logout">Sign out</string>
 

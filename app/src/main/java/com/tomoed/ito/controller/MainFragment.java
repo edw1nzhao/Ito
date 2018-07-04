@@ -92,16 +92,16 @@ public class MainFragment extends Fragment {
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("")
-                        .setMessage("")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(getActivity(), new String[]
-                                        {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                            }
-                        }).create().show();
+                    .setTitle("")
+                    .setMessage("")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Prompt the user once explanation has been shown
+                            ActivityCompat.requestPermissions(getActivity(), new String[]
+                                    {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                        }
+                    }).create().show();
             } else {
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},

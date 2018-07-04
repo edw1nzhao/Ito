@@ -33,12 +33,26 @@ import com.tomoed.ito.R;
 import com.tomoed.ito.model.User;
 
 
-public class SettingFragment extends Fragment {
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_settings, null);
+public class SettingFragment extends Fragment implements View.OnClickListener {
+
+    @Override @Nullable
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_settings, null);
+
+        root.findViewById(R.id.button_logout).setOnClickListener(this);
+
+        return root;
     }
 
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
 
+        if (i == R.id.button_logout) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            Toast.makeText(getActivity(), "Signed out.", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+            FirebaseAuth.getInstance().signOut();
+        }
+    }
 }
