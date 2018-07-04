@@ -20,9 +20,10 @@ import com.tomoed.ito.R;
 import com.tomoed.ito.model.User;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText;
-    User user = new User();
-    private static final String TAG = "RegisterActivity";
+    private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText;
+    private User user = new User();
+
+    private static final String TAG = "Register_Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

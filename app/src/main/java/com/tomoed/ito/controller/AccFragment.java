@@ -9,6 +9,8 @@ import com.tomoed.ito.R;
 
 public class AccFragment extends Fragment {
 
+    private static final String TAG = "Acc_Fragment";
+
     // Required empty public constructor.
     public AccFragment() {
     }

@@ -18,21 +18,21 @@ import android.widget.TextView;
 import com.tomoed.ito.R;
 import com.tomoed.ito.model.User;
 
-public class MainActivity extends AppCompatActivity {
-    private ImageButton closeNav;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageButton navigationCloseButton;
     private TextView titleNav;
-    private DrawerLayout mDrawer;
+    private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private NavigationView nvDrawer;
+    private NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
-    private View header;
-    private User user;
-
-    private boolean main = true;
+    private View navigationHeaderView;
 
     private Fragment mainFrag = null;
     private Fragment currFrag = null;
     private FragmentManager fragmentManager = getSupportFragmentManager();
+
+    private User user;
+    private boolean main = true;
 
     private static final String TAG = "Main_Activity";
 
@@ -43,52 +43,85 @@ public class MainActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("USER");
 
-        // Set a Toolbar to replace the ActionBar.
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nvView);
 
-        // Find our drawer view
-        mDrawer = findViewById(R.id.drawer_layout);
-        nvDrawer = findViewById(R.id.nvView);
-        drawerToggle = setupDrawerToggle();
-        mDrawer.addDrawerListener(drawerToggle);
-        header = nvDrawer.getHeaderView(0);
-
-        Class fragClass = MainFragment.class;
-
-        try {
-            mainFrag = (Fragment) fragClass.newInstance();
-        } catch (Exception error) {
-            Log.d(TAG, error.getMessage());
-        }
-
-        fragmentManager.beginTransaction().replace(R.id.flContent, mainFrag).commit();
-        // Setup drawer view
-        setupDrawerContent(nvDrawer);
-
-        closeNav = header.findViewById(R.id.nav_button_close);
-        closeNav.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mDrawer.closeDrawers();
-            }
-        });
-
-        //Adds user's name to top of side menu.
-        titleNav = header.findViewById(R.id.nav_title);
-        titleNav.setText(user.getFirstName() + " " + user.getLastName());
+        toolbarSetup();
+        drawLayoutSetup();
+        navigationViewSetup();
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.nav_button_close) {
+            drawerLayout.closeDrawers();
+        }
+    }
+
+    //Method related to Toolbar.
+    public void toolbarSetup() {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    //Method related to the DrawerLayout.
+    private void drawLayoutSetup() {
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open,  R.string.nav_drawer_close);
+        drawerLayout.addDrawerListener(drawerToggle);
         navigationView.setNavigationItemSelectedListener(
             new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(MenuItem menuItem) {
-                selectDrawerItem(menuItem);
-                return true;
+                    selectDrawerItem(menuItem);
+                    return true;
                 }
             });
     }
 
+    //Method related to the NavigationView.
+    public void navigationViewSetup() {
+        try {
+            Class fragClass = MainFragment.class;
+            mainFrag = (Fragment) fragClass.newInstance();
+        } catch (Exception error) {
+            Log.d(TAG, error.getMessage());
+        }
+        fragmentManager.beginTransaction().replace(R.id.flContent, mainFrag).commit();
+
+        //Setup NavigationView close button.
+        navigationHeaderView = navigationView.getHeaderView(0);
+        navigationHeaderView.findViewById(R.id.nav_button_close).setOnClickListener(this);
+
+        //Setup NavigationView username.
+        titleNav = navigationHeaderView.findViewById(R.id.nav_title);
+        titleNav.setText(user.getFirstName() + " " + user.getLastName());
+    }
+
+    //Method related to ActionBarDrawerToggle.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //Method related to ActionBarDrawerToggle.
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    //Method related to ActionBarDrawerToggle.
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    //Method related to the NavigationView.
     public void selectDrawerItem(MenuItem menuItem) {
         Class fragmentClass;
         Fragment tempFrag = null;
@@ -116,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, error.getMessage());
         }
 
-        // Insert the fragment by replacing any existing fragment
+        // Insert the fragment by replacing any existing fragment.
         FragmentManager fm = getSupportFragmentManager();
 
         if (main) {
@@ -138,38 +171,11 @@ public class MainActivity extends AppCompatActivity {
                 currFrag = tempFrag;
             }
         }
-
-        // Highlight the selected item has been done by NavigationView
+        // Highlight the selected item has been done by NavigationView.
         menuItem.setChecked(true);
-        // Set action bar title
+        // Set ActionBar title.
         setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        mDrawer.closeDrawers();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.nav_drawer_open,  R.string.nav_drawer_close);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
-        drawerToggle.onConfigurationChanged(newConfig);
+        // Close the NavigationView.
+        drawerLayout.closeDrawers();
     }
 }

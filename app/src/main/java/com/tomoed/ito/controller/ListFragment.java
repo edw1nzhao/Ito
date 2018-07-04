@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import com.tomoed.ito.R;
 
 public class ListFragment extends Fragment {
+
+    private static final String TAG = "List_Fragment";
+
     @Override @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list, null);
