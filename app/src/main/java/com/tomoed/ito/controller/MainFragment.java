@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,6 +32,8 @@ public class MainFragment extends Fragment {
     private GoogleMap googleMap;
     private ArrayList<LatLng> markerPoints;
 
+    private ImageButton newEventButton;
+
     private static final String TAG = "Main_Fragment";
 
     @Override @Nullable
@@ -41,11 +44,20 @@ public class MainFragment extends Fragment {
         mv.onCreate(savedInstanceState);
         mv.onResume();
 
+        newEventButton = root.findViewById(R.id.button_new_event);
+
+        newEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
 
         mv.getMapAsync(new OnMapReadyCallback() {
             @Override
