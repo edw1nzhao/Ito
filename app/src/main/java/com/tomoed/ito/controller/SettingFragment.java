@@ -32,9 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.tomoed.ito.R;
 import com.tomoed.ito.model.User;
 
-
 public class SettingFragment extends Fragment implements View.OnClickListener {
-
     @Override @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_settings, null);

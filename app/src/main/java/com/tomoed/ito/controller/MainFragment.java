@@ -26,7 +26,6 @@ import com.tomoed.ito.R;
 
 import java.util.ArrayList;
 
-
 public class MainFragment extends Fragment {
 
     MapView mv;
