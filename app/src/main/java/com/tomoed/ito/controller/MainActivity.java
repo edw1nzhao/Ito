@@ -19,7 +19,6 @@ import com.tomoed.ito.R;
 import com.tomoed.ito.model.User;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private ImageButton navigationCloseButton;
     private TextView titleNav;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Fragment mainFrag = null;
     private Fragment currFrag = null;
-    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private FragmentManager fm = getSupportFragmentManager();
 
     private User user;
     private boolean main = true;
@@ -87,7 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception error) {
             Log.d(TAG, error.getMessage());
         }
-        fragmentManager.beginTransaction().replace(R.id.flContent, mainFrag).commit();
+
+        fm.beginTransaction().replace(R.id.flContent, mainFrag).commit();
 
         //Setup NavigationView close button.e
         navigationHeaderView = navigationView.getHeaderView(0);

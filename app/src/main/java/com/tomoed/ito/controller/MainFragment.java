@@ -2,13 +2,19 @@ package com.tomoed.ito.controller;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +54,16 @@ public class MainFragment extends Fragment {
 
         newEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Fragment f = null;
 
+                try {
+                    Class c = NewEventFragment.class;
+                    f = (Fragment) c.newInstance();
+                } catch (Exception e) {
+                    Log.d(TAG, e.getMessage());
+                }
+
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.flContent, f).commit();
             }
         });
         try {
