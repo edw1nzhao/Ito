@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 import com.tomoed.ito.R;
 
-import static android.support.constraint.Constraints.TAG;
-
 public class NewEventFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "New_Event_Fragment";
