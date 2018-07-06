@@ -46,8 +46,10 @@ public class NewEventFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                //Leave at bottom. Closes the fragment
-//                getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
+
+
+//                Leave at bottom. Closes the fragment
+                getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
             }
         });
 

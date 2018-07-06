@@ -153,6 +153,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fm = getSupportFragmentManager();
 
         //going to other from main
+
+        //////////////////////////////////TEST CODE////////////////////////////////////////
+        Fragment newEventFrag = null;
+        Class newEventClass = NewEventFragment.class;
+        try {
+            newEventFrag = (Fragment) newEventClass.newInstance();
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
+
+        fm.beginTransaction().remove(newEventFrag);
+        ///////////////////////////////////////////////////////////////////////////////////
         if (main) {
             if (!fragmentClass.equals(MainFragment.class)) {
                 fm.beginTransaction().hide(mainFrag).commit();
@@ -161,8 +173,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 currFrag = tempFrag;
             }
         } else {
-
-
             // Going to Main page from other
             if (fragmentClass.equals(MainFragment.class)) {
                 fm.beginTransaction().remove(currFrag).commit();
