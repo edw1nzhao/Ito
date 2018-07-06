@@ -7,52 +7,36 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.tomoed.ito.R;
 
 import static android.support.constraint.Constraints.TAG;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class NewEventFragment extends Fragment {
-    private ImageButton quitFrag;
-    private Button submitEvent;
+public class NewEventFragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = "New_Event_Fragment";
+
+    // Required empty public constructor.
     public NewEventFragment() {
-        // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_new_event, container, false);
 
-        quitFrag = root.findViewById(R.id.button_newEvent_close);
-        submitEvent = root.findViewById(R.id.button_event_submit);
-
-        quitFrag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .remove(NewEventFragment.this).commit();
-            }
-        });
-
-        submitEvent.setOnClickListener(new View.OnClickListener() {
-            // TODO: Logic for implementing code for uploading onto Firebase here
-            @Override
-            public void onClick(View view) {
-
-
-
-//                Leave at bottom. Closes the fragment
-                getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
-            }
-        });
+        root.findViewById(R.id.button_newEvent_close).setOnClickListener(this);
+        root.findViewById(R.id.button_event_submit).setOnClickListener(this);
 
         return root;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.button_newEvent_close) {
+            getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
+        } else if (i == R.id.button_event_submit) {
+            getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
+        }
     }
 }
