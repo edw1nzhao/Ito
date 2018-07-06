@@ -10,11 +10,11 @@
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/text_event_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="128dp"
         android:ems="10"
         android:inputType="textImeMultiLine|textPersonName"
         android:text="Event Name"
@@ -25,9 +25,32 @@
         android:id="@+id/button_newEvent_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/text_description"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:hint="Event Description"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_event_name" />
+
+    <Button
+        android:id="@+id/button_event_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="75dp"
+        android:text="Submit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_description" />
 </android.support.constraint.ConstraintLayout>
