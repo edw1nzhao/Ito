@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Insert the fragment by replacing any existing fragment.
         FragmentManager fm = getSupportFragmentManager();
 
+        //going to other from main
         if (main) {
             if (!fragmentClass.equals(MainFragment.class)) {
                 fm.beginTransaction().hide(mainFrag).commit();
@@ -160,14 +161,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 currFrag = tempFrag;
             }
         } else {
+
+
+            // Going to Main page from other
             if (fragmentClass.equals(MainFragment.class)) {
                 fm.beginTransaction().remove(currFrag).commit();
                 fm.beginTransaction().show(mainFrag).commit();
                 main = true;
-                currFrag = null;
-            } else {
+                currFrag = mainFrag;
+            }
+            // Going to other from other
+            else {
                 fm.beginTransaction().remove(currFrag).commit();
-                fm.beginTransaction().replace(R.id.flContent, tempFrag).commit();
+                fm.beginTransaction().add(R.id.flContent, tempFrag).commit();
+                main = false;
                 currFrag = tempFrag;
             }
         }
