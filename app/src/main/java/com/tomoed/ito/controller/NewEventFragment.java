@@ -31,7 +31,7 @@ public class NewEventFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_new_event, container, false);
 
         quitFrag = root.findViewById(R.id.button_newEvent_close);
-        submitEvent = root.findViewById(R.id.button_new_event);
+        submitEvent = root.findViewById(R.id.button_event_submit);
 
         quitFrag.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,14 +42,12 @@ public class NewEventFragment extends Fragment {
         });
 
         submitEvent.setOnClickListener(new View.OnClickListener() {
-
             // TODO: Logic for implementing code for uploading onto Firebase here
             @Override
             public void onClick(View view) {
 
-
                 //Leave at bottom. Closes the fragment
-                getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
+//                getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
             }
         });
 

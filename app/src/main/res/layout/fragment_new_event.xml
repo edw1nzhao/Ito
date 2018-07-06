@@ -16,8 +16,8 @@
         android:layout_marginStart="84dp"
         android:layout_marginTop="128dp"
         android:ems="10"
+        android:hint="Event Name"
         android:inputType="textImeMultiLine|textPersonName"
-        android:text="Event Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
