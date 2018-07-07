@@ -56,7 +56,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         Event event = new Event();
         event.setName(nameField.getText().toString());
         event.setDescription(descriptionField.getText().toString());
-        return  event;
+        return event;
     }
 
     public void postNewEvent(Event event) {
@@ -68,12 +68,12 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
             .addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(getActivity(), "addOnComplete: Event created.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "addOnComplete: Event created.");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getActivity(), "addOnFailure: Event not created.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "addOnFailure: Event not created.");
                 }
             });
     }
