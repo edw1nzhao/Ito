@@ -24,6 +24,7 @@ import com.tomoed.ito.model.Event;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class NewEventFragment extends Fragment implements View.OnClickListener {
     EditText nameField, descriptionField;
@@ -84,6 +85,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         FirebaseDatabase.getInstance().getReference()
             .child("events")
             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+            .child(generateString())
             .setValue(event)
             .addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -96,5 +98,9 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
                     Log.d(TAG, "addOnFailure: Event not created.");
                 }
             });
+    }
+
+    public static String generateString() {
+        return UUID.randomUUID().toString();
     }
 }
