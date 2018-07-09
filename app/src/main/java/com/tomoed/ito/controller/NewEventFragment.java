@@ -75,6 +75,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         Event event = new Event();
         event.setName(nameField.getText().toString());
         event.setDescription(descriptionField.getText().toString());
+        event.setCategory((String) eventCategorySpinner.getSelectedItem());
         return event;
     }
 
