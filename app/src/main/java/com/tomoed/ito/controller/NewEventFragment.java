@@ -8,7 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,8 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.tomoed.ito.R;
 import com.tomoed.ito.model.Event;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewEventFragment extends Fragment implements View.OnClickListener {
     EditText nameField, descriptionField;
+    Spinner eventCategorySpinner;
+    List<String> categories = new ArrayList<>();
 
     private static final String TAG = "New_Event_Fragment";
 
@@ -37,6 +45,17 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
 
         root.findViewById(R.id.button_newEvent_close).setOnClickListener(this);
         root.findViewById(R.id.button_event_submit).setOnClickListener(this);
+
+        eventCategorySpinner = (Spinner) root.findViewById(R.id.spinner_category);
+        //Hard-coded for now.
+        categories.add("Academics");
+        categories.add("Dining");
+        categories.add("Entertainment");
+        categories.add("Physical Activity");
+        categories.add("Shopping");
+        SpinnerAdapter eventCategoryAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
+
+        eventCategorySpinner.setAdapter(eventCategoryAdapter);
 
         return root;
     }
