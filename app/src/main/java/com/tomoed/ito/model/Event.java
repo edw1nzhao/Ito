@@ -101,11 +101,11 @@ public class Event {
                 "name='" + name + "\', " +
                 "description='" + description + "\', " +
                 "category='" + category + "\', " +
-                "time='" + time + "\', " +
-                "meetupLocation=" + meetupLocation + "\', " +
-                "destinationLocation=" + destinationLocation + "\', " +
-                "createdBy=" + createdBy + "\', " +
-                "joined=" + Arrays.toString(joined == null ? joined.toArray() : new User[0]) + "\', " +
+//                "time='" + time + "\', " +
+//                "meetupLocation=" + meetupLocation + "\', " +
+//                "destinationLocation=" + destinationLocation + "\', " +
+//                "createdBy=" + createdBy + "\', " +
+//                "joined=" + Arrays.toString(joined == null ? joined.toArray() : new User[0]) + "\', " +
                 '}';
     }
 

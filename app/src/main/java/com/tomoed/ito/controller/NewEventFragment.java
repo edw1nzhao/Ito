@@ -54,6 +54,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         categories.add("Entertainment");
         categories.add("Physical Activity");
         categories.add("Shopping");
+        categories.add("Other");
         SpinnerAdapter eventCategoryAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
 
         eventCategorySpinner.setAdapter(eventCategoryAdapter);
