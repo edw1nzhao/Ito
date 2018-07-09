@@ -37,13 +37,8 @@ public class ListFragment extends Fragment {
     @Override @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list, null);
-        categoryImageMap.put("Academics", R.drawable.splash_study_xhdpi);
-        categoryImageMap.put("Dining", R.drawable.splash_dinner_xhdpi);
-        categoryImageMap.put("Entertainment", R.drawable.splash_board_xhdpi);
-        categoryImageMap.put("Physical Activity", R.drawable.splash_sports_xhdpi);
-        categoryImageMap.put("Shopping", R.drawable.splash_shopping_xhdpi);
-        categoryImageMap.put("Other", R.drawable.splash_other_xhdpi);
 
+        createImageMapping();
         initializeEventList(root);
         return root;
     }
@@ -81,5 +76,14 @@ public class ListFragment extends Fragment {
                 Log.d(TAG, "onCancelled: " + databaseError.toString());
             }
         });
+    }
+
+    public void createImageMapping() {
+        categoryImageMap.put("Academics", R.drawable.splash_study_xhdpi);
+        categoryImageMap.put("Dining", R.drawable.splash_dinner_xhdpi);
+        categoryImageMap.put("Entertainment", R.drawable.splash_board_xhdpi);
+        categoryImageMap.put("Physical Activity", R.drawable.splash_sports_xhdpi);
+        categoryImageMap.put("Shopping", R.drawable.splash_shopping_xhdpi);
+        categoryImageMap.put("Other", R.drawable.splash_other_xhdpi);
     }
 }
