@@ -36,7 +36,6 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "New_Event_Fragment";
 
-    // Required empty public constructor.
     public NewEventFragment() {
     }
 
@@ -51,18 +50,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         root.findViewById(R.id.button_newEvent_close).setOnClickListener(this);
         root.findViewById(R.id.button_event_submit).setOnClickListener(this);
 
-        eventCategorySpinner = (Spinner) root.findViewById(R.id.spinner_category);
-        //Hard-coded for now.
-        categories.add("Academics");
-        categories.add("Dining");
-        categories.add("Entertainment");
-        categories.add("Physical Activity");
-        categories.add("Shopping");
-        categories.add("Other");
-        SpinnerAdapter eventCategoryAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
-
-        eventCategorySpinner.setAdapter(eventCategoryAdapter);
-        eventCategorySpinner.setSelection(0);
+        categorySpinnerSetup(root);
 
         return root;
     }
@@ -82,6 +70,21 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    public void categorySpinnerSetup(View root) {
+        eventCategorySpinner = (Spinner) root.findViewById(R.id.spinner_category);
+
+        categories.add("Academics");
+        categories.add("Dining");
+        categories.add("Entertainment");
+        categories.add("Physical Activity");
+        categories.add("Shopping");
+        categories.add("Other");
+
+        SpinnerAdapter eventCategoryAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
+        eventCategorySpinner.setAdapter(eventCategoryAdapter);
+        eventCategorySpinner.setSelection(0);
+    }
+
     public Event compileEvent() {
         Event event = new Event();
         event.setName(nameField.getText().toString());
@@ -92,7 +95,6 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
     }
 
     public void postNewEvent(Event event) {
-        //Add Event to Database.
         FirebaseDatabase.getInstance().getReference()
             .child("events")
             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
