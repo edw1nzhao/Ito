@@ -43,24 +43,18 @@ public class ListFragment extends Fragment {
         return root;
     }
 
-    /**
-     * TODO: Implement all events currently on server
-     * */
     private void initializeEventList(final View root) {
         if (eventItemList == null) {
             eventItemList = new ArrayList<>();
         }
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        Query query = reference.child("events")
-                .orderByKey()
-                .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query query = reference.child("events");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot templateSnapshot : dataSnapshot.getChildren()){
                     for (DataSnapshot snap: templateSnapshot.getChildren()) {
                         Event event = (Event) snap.getValue(Event.class);
-                        Log.d("THIRD LOOP: ", event.toString());
                         eventItemList.add(new EventRecyclerViewItem(event.getName(), categoryImageMap.get(event.getCategory())));
                     }
                 }
