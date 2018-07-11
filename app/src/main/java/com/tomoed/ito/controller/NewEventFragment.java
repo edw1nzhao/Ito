@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.tomoed.ito.R;
 import com.tomoed.ito.model.Event;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +31,7 @@ import java.util.UUID;
 public class NewEventFragment extends Fragment implements View.OnClickListener {
     EditText nameField, descriptionField;
     Spinner eventCategorySpinner;
+    TimePicker eventStartTimePicker;
     List<String> categories = new ArrayList<>();
 
     private static final String TAG = "New_Event_Fragment";
@@ -43,6 +46,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
 
         nameField = (EditText) root.findViewById(R.id.text_event_name);
         descriptionField = (EditText) root.findViewById(R.id.text_description);
+        eventStartTimePicker = (TimePicker) root.findViewById(R.id.tp_timepicker);
 
         root.findViewById(R.id.button_newEvent_close).setOnClickListener(this);
         root.findViewById(R.id.button_event_submit).setOnClickListener(this);
@@ -58,6 +62,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         SpinnerAdapter eventCategoryAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
 
         eventCategorySpinner.setAdapter(eventCategoryAdapter);
+        eventCategorySpinner.setSelection(0);
 
         return root;
     }
@@ -68,8 +73,12 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         if (i == R.id.button_newEvent_close) {
             getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
         } else if (i == R.id.button_event_submit) {
-            postNewEvent(compileEvent());
-            getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
+            if(!isEmpty(nameField.getText().toString()) && !isEmpty(descriptionField.getText().toString())) {
+                postNewEvent(compileEvent());
+                getFragmentManager().beginTransaction().remove(NewEventFragment.this).commit();
+            } else{
+                Toast.makeText(getContext(), "You must fill out all the fields.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -78,6 +87,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         event.setName(nameField.getText().toString());
         event.setDescription(descriptionField.getText().toString());
         event.setCategory((String) eventCategorySpinner.getSelectedItem());
+
         return event;
     }
 
@@ -99,6 +109,10 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
                     Log.d(TAG, "addOnFailure: Event not created.");
                 }
             });
+    }
+
+    private boolean isEmpty(String string){
+        return string.equals("");
     }
 
     public static String generateString() {
