@@ -16,10 +16,17 @@
     <string name="nav_title_list">List</string>
     <string name="nav_title_account">Account</string>
     <string name="nav_title_settings">Settings</string>
+    <string name="nav_label_username">Username</string>
 
     <!-- Main Activity -->
     <string name="main_title">Home</string>
     <string name="main_button_desc">Add new Event Button</string>
+
+    <!-- View Event Frament -->
+    <string name="view_event_join">Join Event!</string>
+    <string name="view_event_label_description">Event Description</string>
+    <string name="view_event_name">Event Name</string>
+    <string name="view_event_close">Close</string>
 
     <!--Settings-->
     <string name="settings_button_logout">Sign out</string>
@@ -27,6 +34,8 @@
     <!-- -->
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
 
     <!--Google Maps API Key-->
     <string name="google_maps_key">AIzaSyBSOLkfB1fKZLoECfsPifY0dEscK0wu-mk</string>

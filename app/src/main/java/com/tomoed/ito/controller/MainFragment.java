@@ -34,6 +34,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,6 +45,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, OnMa
     private MapView mapView;
     private GoogleMap googleMap;
     private LocationRequest mLocationRequest;
+    private Marker mAddEvent;
 
     private long UPDATE_INTERVAL = 10 * 1000;  // 10 seconds
     private long FASTEST_INTERVAL = 2000; // 2 seconds

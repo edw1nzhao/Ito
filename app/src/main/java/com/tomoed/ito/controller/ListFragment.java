@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,13 +25,14 @@ import com.tomoed.ito.R;
 import com.tomoed.ito.model.Event;
 import com.tomoed.ito.model.EventRecyclerViewDataAdapter;
 import com.tomoed.ito.model.EventRecyclerViewItem;
+import com.tomoed.ito.model.EventViewFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements AdapterView.OnItemClickListener {
     private List<EventRecyclerViewItem> eventItemList = null;
     private Map<String, Integer> categoryImageMap = new HashMap<>();
 
@@ -43,10 +47,34 @@ public class ListFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Fragment f = null;
+        try {
+            Class c = NewEventFragment.class;
+            f = (Fragment) c.newInstance();
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
+
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.flContent, f).commit();
+//        int i = v.getId();
+//        if (i == R.id.button_new_event) {
+//            Fragment f = null;
+//            try {
+//                Class c = NewEventFragment.class;
+//                f = (Fragment) c.newInstance();
+//            } catch (Exception e) {
+//                Log.d(TAG, e.getMessage());
+//            }
+//        }
+    }
+
     private void initializeEventList(final View root) {
         if (eventItemList == null) {
             eventItemList = new ArrayList<>();
         }
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         Query query = reference.child("events");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
