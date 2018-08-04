@@ -1,23 +1,33 @@
 package com.tomoed.ito.model;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import com.tomoed.ito.R;
+import com.tomoed.ito.controller.ListFragment;
 
 public class EventRecyclerViewDataAdapter extends RecyclerView.Adapter<EventRecyclerViewItemHolder> {
 
     private List<EventRecyclerViewItem> eventItemList;
 
-    public EventRecyclerViewDataAdapter(List<EventRecyclerViewItem> eventItemList) {
+    private ListFragment lFrag;
+    private Context mContext;
+
+    public EventRecyclerViewDataAdapter(
+            Context mContext, List<EventRecyclerViewItem> eventItemList, ListFragment lFrag) {
+        this.mContext = mContext;
         this.eventItemList = eventItemList;
+        this.lFrag = lFrag;
     }
+
 
     @Override
     public EventRecyclerViewItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,6 +41,9 @@ public class EventRecyclerViewDataAdapter extends RecyclerView.Adapter<EventRecy
             @Override
             public void onClick(View v) {
                 String eventTitle = eventTitleView.getText().toString();
+
+                // TODO: Load new activity EventDetailFragment (Maybe rename to just EventDetailActivity
+                Toast.makeText(mContext, eventTitle, Toast.LENGTH_LONG).show();
             }
         });
 

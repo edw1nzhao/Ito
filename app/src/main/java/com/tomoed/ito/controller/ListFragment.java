@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +22,6 @@ import com.tomoed.ito.R;
 import com.tomoed.ito.model.Event;
 import com.tomoed.ito.model.EventRecyclerViewDataAdapter;
 import com.tomoed.ito.model.EventRecyclerViewItem;
-import com.tomoed.ito.model.EventViewFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,18 +52,6 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
         }
-
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.flContent, f).commit();
-//        int i = v.getId();
-//        if (i == R.id.button_new_event) {
-//            Fragment f = null;
-//            try {
-//                Class c = NewEventFragment.class;
-//                f = (Fragment) c.newInstance();
-//            } catch (Exception e) {
-//                Log.d(TAG, e.getMessage());
-//            }
-//        }
     }
 
     private void initializeEventList(final View root) {
@@ -90,7 +74,8 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
                 GridLayoutManager gridLM = new GridLayoutManager(getActivity(), 2);
                 eventRV.setLayoutManager(gridLM);
 
-                EventRecyclerViewDataAdapter eventDA = new EventRecyclerViewDataAdapter(eventItemList);
+                EventRecyclerViewDataAdapter eventDA = new EventRecyclerViewDataAdapter(
+                                                            getContext(), eventItemList, ListFragment.this);
                 eventRV.setAdapter(eventDA);
             }
             @Override

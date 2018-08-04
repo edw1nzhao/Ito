@@ -23,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.tomoed.ito.R;
 import com.tomoed.ito.model.Event;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
