@@ -13,11 +13,18 @@
         android:id="@+id/text_event_name"
         android:layout_width="wrap_content"
         android:layout_height="59dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Event Name"
         android:inputType="textImeMultiLine|textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView3"
+        android:layout_width="410dp"
+        android:layout_height="328dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,44 +39,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/text_description"
-        android:layout_width="wrap_content"
-        android:layout_height="130dp"
-        android:layout_marginStart="96dp"
-        android:ems="10"
-        android:hint="Event Description"
-        android:inputType="textMultiLine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_event_name" />
-
     <Button
         android:id="@+id/button_event_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="17dp"
-        android:text="Submit"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="6dp"
+        android:text="Next"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tp_timepicker" />
+
     <Spinner
         android:id="@+id/spinner_category"
         android:layout_width="231dp"
         android:layout_height="45dp"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_description" />
+        app:layout_constraintTop_toBottomOf="@+id/mapView3" />
 
     <TimePicker
         android:id="@+id/tp_timepicker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="122dp"
         android:layout_marginStart="78dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="16dp"
         android:scaleX="0.7"
         android:scaleY="0.7"
         android:timePickerMode="spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
+        app:layout_constraintTop_toBottomOf="@+id/text_event_name" />
+
 </android.support.constraint.ConstraintLayout>

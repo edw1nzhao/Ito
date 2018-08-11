@@ -42,9 +42,9 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_new_event, container, false);
 
-        nameField = (EditText) root.findViewById(R.id.text_event_name);
-        descriptionField = (EditText) root.findViewById(R.id.text_description);
-        eventStartTimePicker = (TimePicker) root.findViewById(R.id.tp_timepicker);
+        nameField = root.findViewById(R.id.text_event_name);
+        descriptionField = root.findViewById(R.id.text_description);
+        eventStartTimePicker = root.findViewById(R.id.tp_timepicker);
 
         root.findViewById(R.id.button_newEvent_close).setOnClickListener(this);
         root.findViewById(R.id.button_event_submit).setOnClickListener(this);
