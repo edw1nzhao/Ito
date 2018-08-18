@@ -15,6 +15,10 @@ import android.widget.SpinnerAdapter;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -27,11 +31,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class NewEventFragment extends Fragment implements View.OnClickListener {
+public class NewEventFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
     EditText nameField, descriptionField;
     Spinner eventCategorySpinner;
     TimePicker eventStartTimePicker;
     List<String> categories = new ArrayList<>();
+    private MapView mapView;
+    private GoogleMap googleMap;
 
     private static final String TAG = "New_Event_Fragment";
 
@@ -43,13 +49,14 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_new_event, container, false);
 
         nameField = root.findViewById(R.id.text_event_name);
-        descriptionField = root.findViewById(R.id.text_description);
         eventStartTimePicker = root.findViewById(R.id.tp_timepicker);
 
         root.findViewById(R.id.button_newEvent_close).setOnClickListener(this);
         root.findViewById(R.id.button_event_submit).setOnClickListener(this);
 
         categorySpinnerSetup(root);
+
+        mapSetup(root, savedInstanceState);
 
         return root;
     }
@@ -118,5 +125,23 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
 
     public static String generateString() {
         return UUID.randomUUID().toString();
+    }
+
+    // Methods related to Google Maps API.
+    @Override
+    public void onMapReady(GoogleMap mMap) {
+        googleMap = mMap;
+    }
+
+    public void mapSetup(View root, Bundle savedInstanceState) {
+        mapView = root.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.onResume();
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mapView.getMapAsync(this);
     }
 }
